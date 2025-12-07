@@ -265,7 +265,13 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       await db.collection('users').doc(user.id).update({ notifications: prefs });
   }
 
-  const togglePro = async () => { /* Managed externally */ };
+  const togglePro = async () => {
+    // Open Stripe payment link in new window
+    if (typeof window !== 'undefined') {
+      const { STRIPE_PAYMENT_LINK } = await import('../constants');
+      window.open(STRIPE_PAYMENT_LINK, '_blank');
+    }
+  };
 
   const sendTestEmail = async () => {
       if (!user) return undefined;
