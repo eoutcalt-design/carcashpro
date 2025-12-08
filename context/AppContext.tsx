@@ -75,15 +75,29 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       if (firebaseUser) {
         const isAdmin = ADMIN_EMAILS.includes(firebaseUser.email || '');
         
+        // Update last login timestamp
+        const userDocRef = db.collection('users').doc(firebaseUser.uid);
+        const now = new Date().toISOString();
+        
+        // Check if user document exists to set createdAt
+        const userDoc = await userDocRef.get();
+        const updateData: any = { lastLogin: now };
+        if (!userDoc.exists) {
+          updateData.createdAt = now;
+        }
+        
+        userDocRef.set(updateData, { merge: true });
+        
         setUser(prev => ({ 
             ...prev, 
             id: firebaseUser.uid, 
             email: firebaseUser.email || '',
-            isAdmin: isAdmin 
+            isAdmin: isAdmin,
+            lastLogin: now,
+            createdAt: userDoc.exists ? (userDoc.data()?.createdAt || now) : now
         } as User));
         
         // --- 1. Listen to User Settings ---
-        const userDocRef = db.collection('users').doc(firebaseUser.uid);
         const unsubscribeSettings = userDocRef.onSnapshot((docSnap) => {
             if (docSnap.exists) {
                 const data = docSnap.data() as any;

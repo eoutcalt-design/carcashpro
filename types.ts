@@ -114,4 +114,6 @@ export interface User {
   notifications?: NotificationPreferences;
   lastPaceEmailDate?: string;
   isAdmin?: boolean;
+  lastLogin?: string; // ISO timestamp of last login
+  createdAt?: string; // ISO timestamp of account creation
 }

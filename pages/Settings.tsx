@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { Header, Card, Button, Toggle, Input } from '../components/Components';
+import { AdminConsole } from '../components/AdminConsole';
 import { Bell, Mail, Key, User, ShieldAlert } from 'lucide-react';
 
 const Settings = () => {
@@ -78,15 +79,7 @@ const Settings = () => {
                     <h2 className="text-xl font-bold">Admin Console</h2>
                 </div>
                 <Card className="bg-slate-900 border border-rose-500/20">
-                    <p className="text-slate-400 text-sm mb-4">
-                        Developer settings and database configuration.
-                        <br/>
-                        <strong>Total Deals in DB:</strong> {deals.length}
-                    </p>
-                    {/* Placeholder for future admin tools */}
-                    <div className="p-4 bg-black/40 rounded-xl font-mono text-xs text-rose-300">
-                        [System Config Hidden from Public Users]
-                    </div>
+                    <AdminConsole />
                 </Card>
             </div>
         )}
