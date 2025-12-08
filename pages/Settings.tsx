@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { Header, Card, Button, Toggle, Input } from '../components/Components';
 import { AdminConsole } from '../components/AdminConsole';
+import { AdminConsoleSimple } from '../components/AdminConsoleSimple';
 import { Bell, Mail, Key, User, ShieldAlert } from 'lucide-react';
 
 const Settings = () => {
@@ -79,7 +80,10 @@ const Settings = () => {
                     <h2 className="text-xl font-bold">Admin Console</h2>
                 </div>
                 <Card className="bg-slate-900 border border-rose-500/20">
-                    <AdminConsole />
+                    <AdminConsoleSimple />
+                    <div className="mt-4 border-t border-white/10 pt-4">
+                      <AdminConsole />
+                    </div>
                 </Card>
             </div>
         )}
