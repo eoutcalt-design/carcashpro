@@ -6,9 +6,10 @@ interface AICoachCardProps {
   message: CoachMessage | null;
   tier: SubscriptionTier;
   onAskQuestion?: () => void;
+  onOpenChat?: () => void;
 }
 
-export const AICoachCard: React.FC<AICoachCardProps> = ({ message, tier, onAskQuestion }) => {
+export const AICoachCard: React.FC<AICoachCardProps> = ({ message, tier, onAskQuestion, onOpenChat }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -125,9 +126,9 @@ export const AICoachCard: React.FC<AICoachCardProps> = ({ message, tier, onAskQu
           <span>Based on your current numbers</span>
         </div>
         
-        {onAskQuestion && (
+        {(onAskQuestion || onOpenChat) && (
           <button
-            onClick={onAskQuestion}
+            onClick={onOpenChat || onAskQuestion}
             className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-sm font-semibold text-white transition-all hover:scale-105"
           >
             Ask a question

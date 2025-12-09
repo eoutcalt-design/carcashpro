@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 import { Header, StatCard, Card, Button } from '../components/Components';
 import { AICoachCard } from '../components/AICoachCard';
+import { AICoachChat } from '../components/AICoachChat';
 
 import { useNavigate } from 'react-router-dom';
 import { Plus, Percent, TrendingUp, TrendingDown } from 'lucide-react';
@@ -15,6 +16,8 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [viewMode, setViewMode] = useState<'income' | 'units'>('income');
   const [coachMessage, setCoachMessage] = useState<CoachMessage | null>(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [coachingContext, setCoachingContext] = useState<any>(null);
   
   // Generate coaching message
   useEffect(() => {
@@ -26,6 +29,7 @@ const Dashboard = () => {
     // Calculate coaching context
     const monthlyGoal = goals.newUnitsGoal + goals.usedUnitsGoal;
     const context = calculateCoachingStats(deals, monthlyGoal, tier);
+    setCoachingContext(context);
     
     // Determine time of day
     const hour = new Date().getHours();
@@ -168,6 +172,17 @@ const Dashboard = () => {
         <AICoachCard 
           message={coachMessage}
           tier={user.subscriptionTier || (isPro ? 'PRO' : 'FREE')}
+          onOpenChat={() => setIsChatOpen(true)}
+        />
+      )}
+
+      {/* AI Coach Chat */}
+      {user && coachingContext && (
+        <AICoachChat
+          isOpen={isChatOpen}
+          onClose={() => setIsChatOpen(false)}
+          tier={user.subscriptionTier || (isPro ? 'PRO' : 'FREE')}
+          context={coachingContext}
         />
       )}
 
