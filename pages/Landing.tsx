@@ -52,20 +52,17 @@ const Landing = () => {
             {/* Left Column: Text - Strictly Aligned to Top */}
             <div className="text-center lg:text-left self-start pt-2">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600/20 border border-blue-500/40 text-blue-200 text-xs font-bold uppercase tracking-wide mb-6 animate-fade-in backdrop-blur-md shadow-lg">
-                    <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                    </span>
-                    #1 Rated App for Sales Pros
+                    <Shield size={14} />
+                    Built by Dealership Veterans
                 </div>
                 
                 <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight drop-shadow-2xl">
-                    Stop Guessing <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 filter drop-shadow-lg">Your Paycheck.</span>
+                    Track Your Car Sales <br />Commissions in <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 filter drop-shadow-lg">Real Time.</span><br />
+                    <span className="text-4xl md:text-5xl">Know Your Pay Before Payroll.</span>
                 </h1>
                 
                 <p className="text-lg text-slate-200 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium drop-shadow-md">
-                    Track every deal, calculate real-time commissions, and crush your monthly goals. The ultimate pocket tool for the modern car dog.
+                    CarCashPro is a real-time commission, pacing, and income-projection system built specifically for automotive sales professionals who want control, clarity, and zero surprises on payday.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
@@ -73,15 +70,15 @@ const Landing = () => {
                         Start Tracking Free <ArrowRight className="ml-2" size={20} />
                     </Button>
                     <button onClick={() => navigate('/login')} className="px-8 py-4 rounded-2xl font-bold text-slate-200 hover:bg-white/10 hover:text-white transition-all w-full sm:w-auto border border-white/10 hover:border-white/30 backdrop-blur-md shadow-lg bg-slate-900/40">
-                        Existing User?
+                        Already Have an Account? Log In
                     </button>
                 </div>
 
-                <div className="mt-10 flex items-center justify-center lg:justify-start gap-6 opacity-90 hover:opacity-100 transition-all duration-500">
-                     <p className="text-xs font-bold uppercase tracking-widest text-slate-400 drop-shadow-md">Trusted by pros at</p>
-                     <div className="font-black text-lg text-white drop-shadow-md tracking-wider opacity-80">TOYOTA</div>
-                     <div className="font-black text-lg text-white drop-shadow-md tracking-wider opacity-80">FORD</div>
-                     <div className="font-black text-lg text-white drop-shadow-md tracking-wider opacity-80">HONDA</div>
+                <div className="mt-10 opacity-90">
+                     <p className="text-sm text-slate-300 drop-shadow-md leading-relaxed">
+                         Built by dealership veterans. Designed for real commission plans.<br />
+                         No spreadsheets. No guessing.
+                     </p>
                 </div>
             </div>
 
@@ -99,18 +96,32 @@ const Landing = () => {
                     <div className="w-full h-full bg-slate-950 relative overflow-hidden">
                         <iframe 
                             className="absolute top-0 left-0 w-full h-full"
-                            src="https://www.youtube.com/embed/3UlClTLnrOs?autoplay=1&mute=1&loop=1&playlist=3UlClTLnrOs&controls=0&modestbranding=1&rel=0&showinfo=0"
-                            title="CarCashPro Demo"
+                            src="https://www.youtube.com/embed/Rj_fizbLSFE?mute=1&controls=1&modestbranding=1&rel=0&showinfo=0"
+                            title="CarCashPro Demo Video"
                             frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
+                            loading="lazy"
                         ></iframe>
                     </div>
                 </div>
                 
                 <div className="mt-4 text-center">
+                    <p className="text-sm text-slate-300 mb-3">
+                        See exactly how CarCashPro works in under 90 seconds.
+                    </p>
+                    <p className="text-xs text-slate-400 mb-3">
+                        Track your first deal in under 60 seconds.
+                    </p>
+                    <Button 
+                        onClick={() => navigate('/signup')} 
+                        className="!w-auto px-6 py-2 text-sm mb-2"
+                    >
+                        Start Tracking Free
+                    </Button>
+                    <br />
                     <a 
-                        href="https://youtube.com/shorts/3UlClTLnrOs" 
+                        href="https://youtu.be/Rj_fizbLSFE" 
                         target="_blank" 
                         rel="noreferrer"
                         className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-blue-400 transition-colors"
@@ -131,7 +142,7 @@ const Landing = () => {
               <p className="text-slate-400 text-lg">Everything you need to dominate the leaderboard.</p>
            </div>
            
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <FeatureCard 
                 icon={<TrendingUp className="text-emerald-400" size={32} />}
                 title="Real-Time Pace"
@@ -147,6 +158,22 @@ const Landing = () => {
                 title="Secure Cloud Sync"
                 description="Your data is encrypted and synced across all your devices instantly. Never lose a deal."
               />
+              <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-3xl p-8 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500/10 rounded-full blur-3xl"></div>
+                <div className="relative z-10">
+                  <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-400/40 text-purple-200 text-xs font-bold uppercase">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+                    </span>
+                    Pro Feature
+                  </div>
+                  <h3 className="text-xl font-bold mb-4 text-white">AI Sales Coach</h3>
+                  <p className="text-slate-300 leading-relaxed">
+                    Your built-in AI monitors your pace, deal flow, and income in real time—alerting you when you're behind target or when you're on track for a record month.
+                  </p>
+                </div>
+              </div>
            </div>
         </div>
       </section>
