@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 import { Header, StatCard, Card, Button } from '../components/Components';
 import { AICoachCard } from '../components/AICoachCard';
-import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
+
 import { useNavigate } from 'react-router-dom';
-import { Plus, Percent, TrendingUp, TrendingDown, ArrowUpRight } from 'lucide-react';
+import { Plus, Percent, TrendingUp, TrendingDown } from 'lucide-react';
 import { PRODUCT_LABELS } from '../constants';
 import { ProductStatus, CoachMessage } from '../types';
 import { generateCoachingMessage, calculateCoachingStats } from '../lib/coachingEngine';
@@ -44,12 +44,6 @@ const Dashboard = () => {
       ...message
     });
   }, [deals, goals, user, isPro]);
-
-  // Mock data for chart
-  const chartData = deals.slice(0, 7).reverse().map((d, i) => ({
-      name: `Deal ${i+1}`,
-      income: d.frontGross + d.backGross
-  }));
 
   // MTD Penetration
   const now = new Date();
@@ -177,56 +171,24 @@ const Dashboard = () => {
         />
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Product Penetration (MTD) */}
-        <div>
-            <div className="flex items-center gap-2 mb-3 px-1">
-                <Percent size={16} className="text-slate-400" />
-                <h3 className="text-slate-300 font-medium text-sm">Product Penetration (MTD)</h3>
-            </div>
-            <div className="flex gap-3 overflow-x-auto pb-2 -mx-6 px-6 md:mx-0 md:px-0 no-scrollbar">
-                {penetrationStats.map((stat) => (
-                    <div key={stat.key} className="flex-none w-24 bg-slate-800/50 border border-white/5 rounded-2xl p-3 flex flex-col items-center justify-center hover:bg-slate-800 transition-colors">
-                        <div className={`text-xl font-bold mb-1 ${stat.percentage >= 50 ? 'text-emerald-400' : 'text-white'}`}>
-                            {stat.percentage}%
-                        </div>
-                        <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                            {stat.label}
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
-
-        {/* Recent Trend */}
-        <div className="h-full">
-            <div className="flex items-center gap-2 mb-3 px-1">
-                <ArrowUpRight size={16} className="text-slate-400" />
-                <h3 className="text-slate-300 font-medium text-sm">Recent Gross Trend</h3>
-            </div>
-            {deals.length > 0 ? (
-                <Card className="h-40">
-                    <div className="h-full w-full">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={chartData}>
-                                <defs>
-                                    <linearGradient id="colorGross" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
-                                        <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
-                                    </linearGradient>
-                                </defs>
-                                <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px', color: '#fff' }} />
-                                <Area type="monotone" dataKey="income" stroke="#3b82f6" strokeWidth={2} fillOpacity={1} fill="url(#colorGross)" />
-                            </AreaChart>
-                        </ResponsiveContainer>
-                    </div>
-                </Card>
-            ) : (
-                <div className="h-40 border border-dashed border-white/10 rounded-2xl flex items-center justify-center text-slate-500 text-sm">
-                    No deals data to visualize
-                </div>
-            )}
-        </div>
+      {/* Product Penetration (MTD) */}
+      <div>
+          <div className="flex items-center gap-2 mb-3 px-1">
+              <Percent size={16} className="text-slate-400" />
+              <h3 className="text-slate-300 font-medium text-sm">Product Penetration (MTD)</h3>
+          </div>
+          <div className="flex gap-3 overflow-x-auto pb-2 -mx-6 px-6 md:mx-0 md:px-0 no-scrollbar">
+              {penetrationStats.map((stat) => (
+                  <div key={stat.key} className="flex-none w-24 bg-slate-800/50 border border-white/5 rounded-2xl p-3 flex flex-col items-center justify-center hover:bg-slate-800 transition-colors">
+                      <div className={`text-xl font-bold mb-1 ${stat.percentage >= 50 ? 'text-emerald-400' : 'text-white'}`}>
+                          {stat.percentage}%
+                      </div>
+                      <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                          {stat.label}
+                      </div>
+                  </div>
+              ))}
+          </div>
       </div>
 
       {!deals.length && (
